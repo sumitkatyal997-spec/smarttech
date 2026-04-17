@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('sale_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('sale_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained()->restrictOnDelete();
+            $table->foreignId('product_unit_id')->nullable()->constrained('product_units')->nullOnDelete();
+            $table->unsignedInteger('qty')->default(1);
+            $table->decimal('unit_price', 12, 2)->default(0);
+            $table->decimal('line_total', 12, 2)->default(0);
             $table->timestamps();
+
+            $table->unique('product_unit_id');
         });
     }
 

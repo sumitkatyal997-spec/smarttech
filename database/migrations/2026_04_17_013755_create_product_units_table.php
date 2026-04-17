@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('product_units', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('purchase_item_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('sale_item_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('serial_number');
+            $table->enum('status', ['in_stock', 'sold'])->default('in_stock');
+            $table->string('location')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
+
+            $table->unique(['product_id', 'serial_number']);
         });
     }
 

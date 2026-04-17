@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('purchase_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained()->restrictOnDelete();
+            $table->unsignedInteger('qty')->default(1);
+            $table->decimal('unit_cost', 12, 2)->default(0);
+            $table->decimal('line_total', 12, 2)->default(0);
+            $table->text('serials_text')->nullable();
             $table->timestamps();
         });
     }
