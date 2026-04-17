@@ -19,6 +19,9 @@
                         <a class="hover:underline" href="{{ route('customers.index') }}">Customers</a>
                         <a class="hover:underline" href="{{ route('purchases.index') }}">Purchases</a>
                         <a class="hover:underline" href="{{ route('sales.index') }}">Sales</a>
+                        @if (auth()->user()->role === 'admin')
+                            <a class="hover:underline" href="{{ route('users.index') }}">Users</a>
+                        @endif
                     </div>
                 </div>
 
