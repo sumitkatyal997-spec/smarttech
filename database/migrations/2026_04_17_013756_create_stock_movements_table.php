@@ -17,8 +17,8 @@ return new class extends Migration
             $table->enum('direction', ['in', 'out', 'adjust']);
             $table->unsignedInteger('qty')->default(0);
             $table->string('reason')->nullable();
-            $table->foreignId('purchase_item_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('sale_item_id')->nullable()->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('purchase_item_id')->nullable()->index();
+            $table->unsignedBigInteger('sale_item_id')->nullable()->index();
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
